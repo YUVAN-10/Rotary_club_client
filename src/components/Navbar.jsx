@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import rotaryLogo from "../assets/rotary-logo.png";
 
-export const Navbar = () => {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -54,4 +54,6 @@ export const Navbar = () => {
       </div>
     </header>
   );
-};
+}
+
+export default Navbar;

@@ -37,9 +37,17 @@ export const Home = () => {
       const verticalMatch = (member.vertical || "").toLowerCase().includes(query);
       const businessMatch = (member.businessAddress || "").toLowerCase().includes(query);
       const addressMatch = (member.memberAddress || "").toLowerCase().includes(query);
+      const dobMatch = (member.dob || "").toLowerCase().includes(query);
+      const weddingMatch = (member.weddingDate || "").toLowerCase().includes(query);
 
       return (
-        nameMatch || phoneMatch || verticalMatch || businessMatch || addressMatch
+        nameMatch ||
+        phoneMatch ||
+        verticalMatch ||
+        businessMatch ||
+        addressMatch ||
+        dobMatch ||
+        weddingMatch
       );
     });
   }, [members, searchTerm]);

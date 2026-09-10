@@ -39,12 +39,11 @@ export const useMembers = () => {
               return; // Skip disabled accounts
             }
 
-            if (data.status === "Completed") {
-              completedCount++;
-            }
             memberList.push({
               id: doc.id,
               ...data,
+              dob: data.dob || data.dateOfBirth || data.birthDate || "",
+              weddingDate: data.weddingDate || data.anniversaryDate || data.marriageDate || "",
               // Fallback vertical if empty
               vertical: data.vertical?.trim() || "Rotarian",
               status: data.status || "Active",
@@ -52,27 +51,14 @@ export const useMembers = () => {
           }
         });
 
-        // If there are members explicitly marked "Completed", filter for those;
-        // Otherwise, show all imported/available members so records are not hidden
-        const activeMembers =
-          completedCount > 0
-            ? memberList.filter(
-                (m) =>
-                  m.status === "Completed" ||
-                  m.status === "Active" ||
-                  !m.status ||
-                  m.status === "active"
-              )
-            : memberList;
-
         // Sort alphabetically by member name
-        activeMembers.sort((a, b) => {
+        memberList.sort((a, b) => {
           const nameA = (a.name || "").toLowerCase().trim();
           const nameB = (b.name || "").toLowerCase().trim();
           return nameA.localeCompare(nameB);
         });
 
-        setMembers(activeMembers);
+        setMembers(memberList);
         setLoading(false);
       },
       (err) => {

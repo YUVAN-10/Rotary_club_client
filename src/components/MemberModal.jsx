@@ -9,6 +9,9 @@ import {
   Check,
   ExternalLink,
   MessageCircle,
+  Cake,
+  Heart,
+  Calendar,
 } from "lucide-react";
 
 export const MemberModal = ({ member, onClose }) => {
@@ -67,6 +70,82 @@ export const MemberModal = ({ member, onClose }) => {
     const clean = phone.replace(/[^\d+]/g, "");
     return `tel:${clean}`;
   };
+
+  // Helper to format date strings or Timestamps cleanly (e.g. 15 Aug 1990)
+  const formatDate = (dateVal) => {
+    if (!dateVal) return "";
+
+    // If Firestore Timestamp
+    if (typeof dateVal === "object" && dateVal?.toDate) {
+      try {
+        const d = dateVal.toDate();
+        return d.toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      } catch {
+        // continue
+      }
+    }
+
+    if (typeof dateVal === "string") {
+      const trimmed = dateVal.trim();
+      if (!trimmed) return "";
+
+      // Check YYYY-MM-DD format
+      const ymdMatch = trimmed.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      if (ymdMatch) {
+        const year = parseInt(ymdMatch[1], 10);
+        const month = parseInt(ymdMatch[2], 10) - 1;
+        const day = parseInt(ymdMatch[3], 10);
+        const dateObj = new Date(year, month, day);
+        if (!isNaN(dateObj.getTime())) {
+          return dateObj.toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          });
+        }
+      }
+
+      // Check DD-MM-YYYY or DD/MM/YYYY format
+      const dmyMatch = trimmed.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+      if (dmyMatch) {
+        const day = parseInt(dmyMatch[1], 10);
+        const month = parseInt(dmyMatch[2], 10) - 1;
+        const year = parseInt(dmyMatch[3], 10);
+        const dateObj = new Date(year, month, day);
+        if (!isNaN(dateObj.getTime())) {
+          return dateObj.toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          });
+        }
+      }
+
+      // Standard parse
+      const parsed = new Date(trimmed);
+      if (!isNaN(parsed.getTime()) && parsed.getFullYear() > 1900) {
+        return parsed.toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      }
+
+      return trimmed;
+    }
+
+    return String(dateVal);
+  };
+
+  const dobValue = member.dob || member.dateOfBirth || member.birthDate;
+  const weddingValue = member.weddingDate || member.anniversaryDate || member.marriageDate;
+
+  const formattedDob = formatDate(dobValue);
+  const formattedWedding = formatDate(weddingValue);
 
   return (
     <div
@@ -196,6 +275,51 @@ export const MemberModal = ({ member, onClose }) => {
                 </div>
               )}
             </div>
+
+            {/* Date of Birth & Wedding Date Section */}
+            {(formattedDob || formattedWedding) && (
+              <div
+                className={`grid gap-3.5 ${
+                  formattedDob && formattedWedding
+                    ? "grid-cols-1 sm:grid-cols-2"
+                    : "grid-cols-1"
+                }`}
+              >
+                {/* Date of Birth Card */}
+                {formattedDob && (
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-700 shrink-0">
+                      <Cake className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                        Date of Birth
+                      </div>
+                      <div className="text-sm sm:text-base font-bold text-slate-800 font-mono sm:font-sans">
+                        {formattedDob}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Wedding Date Card */}
+                {formattedWedding && (
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-600 shrink-0">
+                      <Heart className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                        Wedding Date
+                      </div>
+                      <div className="text-sm sm:text-base font-bold text-slate-800 font-mono sm:font-sans">
+                        {formattedWedding}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Business Address */}
             {member.businessAddress && (

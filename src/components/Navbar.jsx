@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import rotaryLogo from "../assets/rotary-logo.png";
-import aathmaLogo from "../assets/aathma-logo-white-stroke.png";
+import aathmaLogo from "../assets/aathma-logo.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,11 +15,10 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled
           ? "bg-[#0B3C8A]/95 backdrop-blur-md shadow-lg border-b border-[#D4AF37]/30"
           : "bg-[#0B3C8A] border-b border-[#0B3C8A]"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center py-2 sm:py-3 md:py-4 min-h-[5.5rem] sm:min-h-[7rem] md:min-h-[8.5rem]">
@@ -51,14 +50,12 @@ export function Navbar() {
               </span>
             </div>
 
-            {/* Right: Aathma Theme Logo (Crisp White/Gold Silhouette Stroke, No Box) */}
-            <div className="relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shrink-0">
-              {/* Subtle ambient soft backlight glow */}
-              <div className="absolute inset-0 rounded-full bg-white/10 blur-xl pointer-events-none" />
+            {/* Right: Aathma Theme Logo with White Background Badge */}
+            <div className="relative flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl p-1.5 sm:p-2 shadow-md border border-[#D4AF37]/50 group-hover:scale-105 transition-transform duration-300 shrink-0">
               <img
                 src={aathmaLogo}
                 alt="Rotary Aathma Logo"
-                className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+                className="h-14 sm:h-20 md:h-24 lg:h-28 w-auto object-contain drop-shadow-sm"
               />
             </div>
           </a>

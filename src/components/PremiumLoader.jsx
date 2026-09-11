@@ -129,39 +129,31 @@ export const PremiumLoader = ({ onComplete, minDuration = 2800 }) => {
       {/* Center Main Stage */}
       <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto z-10">
         {/* Stage 1: Logo & Concentric Rotating Orbit Rings */}
-        <div className="relative flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mb-8 sm:mb-10 md:mb-12 shrink-0">
+        <div className="relative flex items-center justify-center w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 mb-8 sm:mb-10 md:mb-12 shrink-0">
           {/* Outer Dashed Chronometer Ring */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border border-dashed border-[#D4AF37]/30 pointer-events-none"
+            className="absolute inset-0 rounded-full border border-dashed border-[#D4AF37]/35 pointer-events-none"
           />
 
-          {/* Middle Rotating Metallic Gold Conic Gradient Ring */}
+          {/* Middle Rotating Gold Ring */}
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[82%] h-[82%] rounded-full pointer-events-none"
-            style={{
-              border: "1.5px solid transparent",
-              backgroundImage:
-                "linear-gradient(#FFFFFF, #FFFFFF), conic-gradient(from 0deg, #D4AF37 0%, rgba(212,175,55,0.1) 40%, #0B3C8A 65%, #FFF2A7 85%, #D4AF37 100%)",
-              backgroundOrigin: "border-box",
-              backgroundClip: "content-box, border-box",
-              boxShadow: "0 0 14px rgba(212, 175, 55, 0.15)",
-            }}
+            className="absolute w-[84%] h-[84%] rounded-full border-[1.5px] border-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.2)] pointer-events-none"
           >
             {/* Orbiting Gold Bead 1 */}
-            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-[#B89020] to-[#FFF2A7] shadow-[0_0_8px_#D4AF37]" />
+            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gradient-to-tr from-[#B89020] to-[#FFF2A7] shadow-[0_0_8px_#D4AF37]" />
             {/* Orbiting Blue Bead 2 */}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#0B3C8A] shadow-[0_0_6px_rgba(11,60,138,0.5)]" />
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#0B3C8A] shadow-[0_0_6px_rgba(11,60,138,0.5)]" />
           </motion.div>
 
           {/* Inner Golden Orbit Ring */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[66%] h-[66%] rounded-full border border-[#D4AF37]/35 pointer-events-none"
+            className="absolute w-[68%] h-[68%] rounded-full border border-[#D4AF37]/35 pointer-events-none"
           >
             <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_6px_#D4AF37]" />
           </motion.div>
@@ -170,23 +162,23 @@ export const PremiumLoader = ({ onComplete, minDuration = 2800 }) => {
           <motion.div
             animate={{
               scale: [0.95, 1.15, 0.95],
-              opacity: [0.4, 0.8, 0.4],
+              opacity: [0.35, 0.7, 0.35],
             }}
             transition={{
               duration: 2.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute w-[55%] h-[55%] rounded-full bg-radial from-[#D4AF37]/25 via-[#0B3C8A]/10 to-transparent blur-xl pointer-events-none"
+            className="absolute w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-[#D4AF37]/25 via-[#0B3C8A]/10 to-transparent blur-xl pointer-events-none"
           />
 
-          {/* Center Logo Container with Floating, Glow Pulse & Light Sweep */}
+          {/* Center Logo Container with Floating, Glow Pulse & Full Visibility (No Clipping) */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.85, opacity: 0 }}
             animate={{
               scale: 1,
               opacity: 1,
-              y: [-3, 3, -3],
+              y: [-4, 4, -4],
             }}
             transition={{
               scale: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
@@ -198,49 +190,28 @@ export const PremiumLoader = ({ onComplete, minDuration = 2800 }) => {
                 delay: 0.9,
               },
             }}
-            className="relative z-10 w-[50%] h-[50%] flex items-center justify-center p-1.5 rounded-2xl"
+            className="relative z-10 flex items-center justify-center pointer-events-none"
           >
             {/* Golden Pulsing Glow behind Logo */}
             <motion.div
               animate={{
-                opacity: [0.35, 0.75, 0.35],
-                scale: [0.98, 1.05, 0.98],
+                opacity: [0.35, 0.7, 0.35],
+                scale: [0.96, 1.04, 0.96],
               }}
               transition={{
-                duration: 1.5,
+                duration: 2,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute inset-0 rounded-2xl pointer-events-none"
-              style={{
-                filter: "drop-shadow(0 0 14px rgba(212, 175, 55, 0.45))",
-              }}
+              className="absolute inset-0 rounded-full blur-xl pointer-events-none bg-gradient-to-tr from-[#D4AF37]/30 to-[#0B3C8A]/20"
             />
 
-            {/* Rotary Logo with Light Sweep Overlay */}
-            <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-xl">
+            {/* Rotary Logo - Entire Shield Top & Bottom Completely Visible */}
+            <div className="relative flex items-center justify-center">
               <img
                 src={rotaryLogo}
-                alt="Rotary Club of Erode Central"
-                className="w-full h-full object-contain filter drop-shadow-[0_4px_12px_rgba(11,60,138,0.15)]"
-              />
-
-              {/* Golden Light Sweep Passing Across Logo */}
-              <motion.div
-                initial={{ x: "-160%" }}
-                animate={{ x: "220%" }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2.2,
-                  ease: "easeInOut",
-                  repeatDelay: 1.2,
-                }}
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.75) 48%, rgba(212, 175, 55, 0.8) 52%, transparent 75%)",
-                  mixBlendMode: "overlay",
-                }}
+                alt="Rotary Club of Erode Central - Silver Jubilee"
+                className="h-32 sm:h-40 md:h-48 w-auto object-contain drop-shadow-[0_8px_20px_rgba(11,60,138,0.22)]"
               />
             </div>
           </motion.div>

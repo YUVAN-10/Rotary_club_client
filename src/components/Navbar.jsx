@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import rotaryLogo from "../assets/rotary-logo.png";
-import aathmaLogo from "../assets/aathma-logo.png";
+import aathmaLogo from "../assets/aathma-logo-white-stroke.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,12 +51,14 @@ export function Navbar() {
               </span>
             </div>
 
-            {/* Right: Aathma Theme Logo */}
+            {/* Right: Aathma Theme Logo (Crisp White/Gold Silhouette Stroke, No Box) */}
             <div className="relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shrink-0">
+              {/* Subtle ambient soft backlight glow */}
+              <div className="absolute inset-0 rounded-full bg-white/10 blur-xl pointer-events-none" />
               <img
                 src={aathmaLogo}
                 alt="Rotary Aathma Logo"
-                className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-lg"
+                className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
               />
             </div>
           </a>
